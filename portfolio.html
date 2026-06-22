@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>N. Tharun Kumar Reddy — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0B0F1A;
+      --surface:   #111827;
+      --border:    #1E2A3A;
+      --accent:    #38BDF8;
+      --accent2:   #818CF8;
+      --text:      #E2E8F0;
+      --muted:     #64748B;
+      --card-bg:   #141E2E;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 5vw;
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 5vw 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px; height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    h1 .highlight {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      background: var(--accent);
+      color: #0B0F1A;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(56,189,248,0.06);
+    }
+    .terminal-bar {
+      background: var(--card-bg);
+      padding: 0.7rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .dot-red    { background: #FF5F57; }
+    .dot-yellow { background: #FFBD2E; }
+    .dot-green  { background: #28CA42; }
+    .terminal-body {
+      padding: 1.8rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      line-height: 2;
+    }
+    .t-prompt { color: var(--accent); }
+    .t-key    { color: var(--accent2); }
+    .t-val    { color: #A3E635; }
+    .t-str    { color: #FCA5A5; }
+    .t-muted  { color: var(--muted); }
+    .cursor {
+      display: inline-block;
+      width: 8px; height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* SECTIONS */
+    section { padding: 6rem 5vw; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about { background: var(--surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 1rem; }
+    .stat-row {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .about-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .detail-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .detail-icon { font-size: 1.2rem; margin-top: 0.15rem; }
+    .detail-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .detail-val { font-size: 0.95rem; font-weight: 500; color: var(--text); }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-category {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+    .skill-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECTS (was Experience) */
+    #projects { background: var(--surface); }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .tl-date { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; padding-top: 0.3rem; }
+    .tl-company { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+    .tl-role { font-size: 0.88rem; color: var(--accent); margin-bottom: 0.6rem; }
+    .tl-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.8; }
+    .tl-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .chip {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      background: rgba(56,189,248,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.2);
+      letter-spacing: 0.04em;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-text p { color: var(--muted); margin-bottom: 1.2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, color 0.2s;
+      font-size: 0.92rem;
+      word-break: break-all;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+    .contact-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    input, textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 110px; }
+    .btn-send {
+      padding: 0.85rem 2rem;
+      background: var(--accent);
+      color: #0B0F1A;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      align-self: flex-start;
+      transition: opacity 0.2s;
+    }
+    .btn-send:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; color: var(--muted);
+    }
+
+    /* GLOW ORBS */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 { width: 500px; height: 500px; background: rgba(56,189,248,0.06); top: -100px; right: -100px; }
+    .orb-2 { width: 400px; height: 400px; background: rgba(129,140,248,0.06); bottom: 0; left: -80px; }
+    #hero > * { position: relative; z-index: 1; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .stat-row { grid-template-columns: repeat(3, 1fr); }
+      nav { padding: 1rem 4vw; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">TKR</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <p class="hero-eyebrow">B.Tech CSE Student · Developer</p>
+        <h1>
+          N. Tharun<br/>
+          <span class="highlight">Kumar Reddy</span>
+        </h1>
+        <p class="hero-desc">
+          Passionate Computer Science Engineering student focused on web development, software engineering, and data analytics. I enjoy building responsive web applications, solving real-world problems, and learning modern technologies.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">Get in touch</a>
+          <a href="#projects" class="btn-outline">View projects</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="terminal-bar">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <div class="terminal-body">
+          <div><span class="t-prompt">$</span> <span class="t-muted">cat student.json</span></div>
+          <div>&nbsp;</div>
+          <div>{</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Name"</span>: <span class="t-str">"N. Tharun Kumar Reddy"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Role"</span>: <span class="t-str">"B.Tech CSE Student"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Skills"</span>: [<span class="t-str">"Java"</span>, <span class="t-str">"HTML"</span>, <span class="t-str">"CSS"</span>, <span class="t-str">"JavaScript"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Interests"</span>: [<span class="t-str">"Web Dev"</span>, <span class="t-str">"Data Analytics"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Location"</span>: <span class="t-str">"Andhra Pradesh, India"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"Open_to"</span>: <span class="t-val">true</span></div>
+          <div>}<span class="cursor"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label">Background</p>
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I am a third-year Computer Science Engineering student passionate about software development, web technologies, and problem solving.</p>
+          <p>My interests include Full Stack Development, Data Analytics And Open Source Contributions.</p>
+          <p>I enjoy creating responsive websites, exploring new technologies, and continuously improving my technical skills.</p>
+
+          <div class="stat-row">
+            <div class="stat-box">
+              <div class="stat-num">3+</div>
+              <div class="stat-label">Years Learning</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">5+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">3+</div>
+              <div class="stat-label">Technologies</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-details">
+          <div class="detail-item">
+            <span class="detail-icon">🎓</span>
+            <div>
+              <div class="detail-label">Degree</div>
+              <div class="detail-val">B.Tech CSE</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">📍</span>
+            <div>
+              <div class="detail-label">Location</div>
+              <div class="detail-val">Andhra Pradesh, India</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">💡</span>
+            <div>
+              <div class="detail-label">Interests</div>
+              <div class="detail-val">Web Development · Data Analytics</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🌐</span>
+            <div>
+              <div class="detail-label">Languages</div>
+              <div class="detail-val">Telugu · English</div>
+            </div>
+          </div>
+          <div class="detail-item">
+            <span class="detail-icon">🚀</span>
+            <div>
+              <div class="detail-label">Career Goal</div>
+              <div class="detail-val">Software Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="section-label">Expertise</p>
+      <h2>Skills & Tools</h2>
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <p class="skill-category">Frontend Development</p>
+          <h3>Web Technologies</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Building responsive, accessible websites with modern HTML, CSS, and JavaScript.</p>
+          <div class="skill-tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">Programming</p>
+          <h3>Core Languages</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Problem solving and application development using C and Java with strong OOP fundamentals.</p>
+          <div class="skill-tags">
+            <span class="tag">C</span>
+            <span class="tag">Java</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">Version Control</p>
+          <h3>Git & GitHub</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Managing code with Git, collaborating on open source, and maintaining personal project repositories.</p>
+          <div class="skill-tags">
+            <span class="tag">Git</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">Data Analytics</p>
+          <h3>Data & Statistics</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Analysing datasets, drawing insights, and presenting findings using spreadsheets and statistical methods.</p>
+          <div class="skill-tags">
+            <span class="tag">Excel</span>
+            <span class="tag">Statistics</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">UI/UX Design</p>
+          <h3>Responsive Design</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Crafting clean, modern layouts that work across all screen sizes and devices.</p>
+          <div class="skill-tags">
+            <span class="tag">Responsive Design</span>
+            <span class="tag">Modern Layouts</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <p class="skill-category">Problem Solving</p>
+          <h3>DSA & Algorithms</h3>
+          <p style="color:var(--muted);font-size:0.88rem;">Practising data structures and algorithms to build efficient, optimised solutions.</p>
+          <div class="skill-tags">
+            <span class="tag">DSA</span>
+            <span class="tag">Algorithms</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-inner">
+      <p class="section-label">Work</p>
+      <h2>Projects</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="tl-date">Personal Project</div>
+          <div>
+            <div class="tl-company">Portfolio Website</div>
+            <div class="tl-role">Frontend Development</div>
+            <p class="tl-desc">Designed and developed a responsive portfolio website using HTML, CSS, and JavaScript to showcase skills, projects, and contact information.</p>
+            <div class="tl-chips">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-date">Team Project</div>
+          <div>
+            <div class="tl-company">Hackathon Project</div>
+            <div class="tl-role">Collaborative Web Development</div>
+            <p class="tl-desc">Collaborated with a team to develop innovative web-based solutions during hackathons, focusing on rapid prototyping and practical problem solving.</p>
+            <div class="tl-chips">
+              <span class="chip">Teamwork</span>
+              <span class="chip">Web Development</span>
+              <span class="chip">Prototyping</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-date">Open Source</div>
+          <div>
+            <div class="tl-company">GitHub Contributions</div>
+            <div class="tl-role">Version Control & Collaboration</div>
+            <p class="tl-desc">Worked on personal and collaborative coding projects using Git and GitHub, practising clean commit history, branching workflows, and code reviews.</p>
+            <div class="tl-chips">
+              <span class="chip">Git</span>
+              <span class="chip">GitHub</span>
+              <span class="chip">Open Source</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label">Get in touch</p>
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-text">
+          <p>I'm open to internship opportunities, project collaborations, or just a chat about web development and technology. Feel free to reach out!</p>
+
+          <div class="contact-links">
+            <a href="mailto:ntharunkumarr@gmail.com" class="contact-link">
+              <span class="contact-icon">✉️</span>
+              ntharunkumarr@gmail.com
+            </a>
+            <a href="https://www.linkedin.com/in/tharun-kumar-reddy-baa2a9335/" target="_blank" class="contact-link">
+              <span class="contact-icon">🔗</span>
+              linkedin.com/in/tharun-kumar-reddy-baa2a9335
+            </a>
+            <a href="https://github.com/tarun8999" target="_blank" class="contact-link">
+              <span class="contact-icon">🐙</span>
+              github.com/tarun8999
+            </a>
+            <div class="contact-link" style="pointer-events:none; cursor:default;">
+              <span class="contact-icon">📍</span>
+              Andhra Pradesh, India
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form
+            id="portfolio-contact"
+            action="https://submit.jotform.com/submit/261722695409060"
+            method="POST"
+            target="jotform-response"
+            onsubmit="handleSubmit()"
+          >
+            <!-- Jotform hidden fields -->
+            <input type="hidden" name="formID" value="261722695409060"/>
+            <input type="hidden" id="JWTContainer" value=""/>
+            <input type="hidden" id="cardinalOrderNumber" value=""/>
+
+            <div class="form-group">
+              <label for="q3_fullName">Your Name <span style="color:var(--accent)">*</span></label>
+              <input type="text" id="q3_fullName" name="q3_fullName[first]" placeholder="e.g. Rahul Sharma" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="q4_email">Email Address <span style="color:var(--accent)">*</span></label>
+              <input type="email" id="q4_email" name="q4_email" placeholder="you@example.com" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="q5_subject">Subject <span style="color:var(--accent)">*</span></label>
+              <input type="text" id="q5_subject" name="q5_subject" placeholder="e.g. Internship Opportunity, Collaboration..." required/>
+            </div>
+
+            <div class="form-group">
+              <label for="q6_message">Message <span style="color:var(--accent)">*</span></label>
+              <textarea id="q6_message" name="q6_message" placeholder="What's on your mind?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-send">Send Message ➜</button>
+          </form>
+
+          <!-- Hidden iframe to capture Jotform response without page redirect -->
+          <iframe name="jotform-response" style="display:none;"></iframe>
+
+          <!-- Success message (shown after submit) -->
+          <div id="form-success" style="display:none; margin-top:1.5rem; padding:1.2rem 1.5rem; background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:8px; color:var(--accent); font-size:0.95rem;">
+            ✅ Message sent! I'll get back to you soon.
+          </div>
+
+          <script>
+            function handleSubmit() {
+              setTimeout(function() {
+                document.getElementById('portfolio-contact').style.display = 'none';
+                document.getElementById('form-success').style.display = 'block';
+              }, 1200);
+            }
+          </script>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 N. Tharun Kumar Reddy</span>
+    <span>B.Tech CSE Student | Developer</span>
+  </footer>
+
+</body>
+</html>
