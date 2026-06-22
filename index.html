@@ -440,12 +440,12 @@
           <div><span class="t-prompt">$</span> <span class="t-muted">cat student.json</span></div>
           <div>&nbsp;</div>
           <div>{</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Name"</span>: <span class="t-str">"N. Tharun Kumar Reddy"</span>,</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Role"</span>: <span class="t-str">"B.Tech CSE Student"</span>,</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Skills"</span>: [<span class="t-str">"Java"</span>, <span class="t-str">"HTML"</span>, <span class="t-str">"CSS"</span>, <span class="t-str">"JavaScript"</span>],</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Interests"</span>: [<span class="t-str">"Web Dev"</span>, <span class="t-str">"Data Analytics"</span>],</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Location"</span>: <span class="t-str">"Andhra Pradesh, India"</span>,</div>
-          <div>&nbsp;&nbsp;<span class="t-key">"Open_to"</span>: <span class="t-val">true</span></div>
+          <div>&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-str">"N. Tharun Kumar Reddy"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-str">"B.Tech CSE Student"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"skills"</span>: [<span class="t-str">"Java"</span>, <span class="t-str">"HTML"</span>, <span class="t-str">"CSS"</span>, <span class="t-str">"JavaScript"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"interests"</span>: [<span class="t-str">"Web Dev"</span>, <span class="t-str">"Data Analytics"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-str">"Andhra Pradesh, India"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="t-key">"open_to"</span>: <span class="t-val">true</span></div>
           <div>}<span class="cursor"></span></div>
         </div>
       </div>
@@ -675,57 +675,47 @@
         </div>
 
         <div class="contact-form">
-          <form
-            id="portfolio-contact"
-            action="https://submit.jotform.com/submit/261722695409060"
-            method="POST"
-            target="jotform-response"
-            onsubmit="handleSubmit()"
-          >
-            <!-- Jotform hidden fields -->
-            <input type="hidden" name="formID" value="261722695409060"/>
-            <input type="hidden" id="JWTContainer" value=""/>
-            <input type="hidden" id="cardinalOrderNumber" value=""/>
 
-            <div class="form-group">
-              <label for="q3_fullName">Your Name <span style="color:var(--accent)">*</span></label>
-              <input type="text" id="q3_fullName" name="q3_fullName[first]" placeholder="e.g. Rahul Sharma" required/>
-            </div>
+          <!-- Jotform official iframe embed — guaranteed field mapping -->
+          <iframe
+            id="jotform-iframe"
+            title="Contact Form"
+            src="https://form.jotform.com/261722695409060"
+            style="width:100%; min-height:580px; border:none; border-radius:10px;"
+            scrolling="no"
+            allow="geolocation; microphone; camera"
+          ></iframe>
 
-            <div class="form-group">
-              <label for="q4_email">Email Address <span style="color:var(--accent)">*</span></label>
-              <input type="email" id="q4_email" name="q4_email" placeholder="you@example.com" required/>
-            </div>
+          <!-- Auto-resize + success detection -->
+          <script>
+            (function() {
+              var iframe = document.getElementById('jotform-iframe');
 
-            <div class="form-group">
-              <label for="q5_subject">Subject <span style="color:var(--accent)">*</span></label>
-              <input type="text" id="q5_subject" name="q5_subject" placeholder="e.g. Internship Opportunity, Collaboration..." required/>
-            </div>
+              // Auto-resize iframe to full form height
+              window.addEventListener('message', function(e) {
+                if (!e.data) return;
+                // Height resize message from Jotform
+                if (e.data.action === 'setHeight' || (e.data.type === 'setHeight')) {
+                  var h = e.data.value || e.data.height;
+                  if (h) iframe.style.minHeight = parseInt(h) + 'px';
+                }
+                // Submission completed message from Jotform
+                if (
+                  e.data.action === 'submission-completed' ||
+                  e.data.formID === '261722695409060'
+                ) {
+                  iframe.style.minHeight = '120px';
+                  document.getElementById('form-success').style.display = 'block';
+                }
+              });
+            })();
+          </script>
 
-            <div class="form-group">
-              <label for="q6_message">Message <span style="color:var(--accent)">*</span></label>
-              <textarea id="q6_message" name="q6_message" placeholder="What's on your mind?" required></textarea>
-            </div>
-
-            <button type="submit" class="btn-send">Send Message ➜</button>
-          </form>
-
-          <!-- Hidden iframe to capture Jotform response without page redirect -->
-          <iframe name="jotform-response" style="display:none;"></iframe>
-
-          <!-- Success message (shown after submit) -->
-          <div id="form-success" style="display:none; margin-top:1.5rem; padding:1.2rem 1.5rem; background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:8px; color:var(--accent); font-size:0.95rem;">
+          <!-- Success banner shown after submission -->
+          <div id="form-success" style="display:none; margin-top:1rem; padding:1rem 1.4rem; background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.3); border-radius:8px; color:var(--accent); font-size:0.95rem;">
             ✅ Message sent! I'll get back to you soon.
           </div>
 
-          <script>
-            function handleSubmit() {
-              setTimeout(function() {
-                document.getElementById('portfolio-contact').style.display = 'none';
-                document.getElementById('form-success').style.display = 'block';
-              }, 1200);
-            }
-          </script>
         </div>
       </div>
     </div>
